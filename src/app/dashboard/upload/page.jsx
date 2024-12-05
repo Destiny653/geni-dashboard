@@ -7,7 +7,7 @@ import Burger from '@/app/components/Burger/Burger';
 import StatusForm from '@/app/components/StatusForm/StatusForm';
 import { GlobalContext } from '../../../../context/GlobalContext';
 
-export default function page() {
+export default function Page() {
 
   const [active, setActive] = useState(true)
   const { setActionPath, setUpdateValue } = useContext(GlobalContext)
