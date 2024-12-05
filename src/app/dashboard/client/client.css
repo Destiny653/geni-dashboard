@@ -1,0 +1,30 @@
+.client-list {
+    background-color: #ffffff93;
+    border: 1px solid #ffffffd2;
+    border-radius: 8px; 
+    height: fit-content;
+    overflow: hidden;
+}
+
+.client-list ul {
+    display: grid;
+    grid-template-columns: 26% 19% 19% 26% 10%;
+    align-items: center;
+    width: 100%;
+    text-wrap: nowrap;
+    box-sizing: border-box;
+    padding: 3px 10px;
+    border-bottom: 1px solid rgba(139, 190, 206, 0.205);
+}
+.client-list ul:nth-child(1){
+    padding: 8px 10px;
+}
+.client-list li {
+    font-size: 14px;
+    overflow: hidden; 
+}
+
+.client-list h1 ,
+.client-list p{
+    font-size: 12px;
+}  

@@ -1,0 +1,116 @@
+.order-main {
+    display: grid;
+    grid-template-columns: 78.5% 20%;
+    gap: 1.5%;
+}
+.order-list {
+    background-color: #ffffff93;
+    border: 1px solid #ffffffd2;
+    border-radius: 8px; 
+    overflow: hidden;
+    height: fit-content;
+}
+
+.order-list-item {
+    display: grid;
+    grid-template-columns: 30% 20% 20% 20% 10%;
+    align-items: center; 
+    width: 100%;
+    text-wrap: nowrap;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 3px 10px;
+    border-bottom: 1px solid rgba(139, 190, 206, 0.205);
+}
+
+.order-list ul:nth-child(1){
+    padding: 8px 10px;
+}
+.order-list li {
+    font-size: 14px;
+    overflow: hidden;  
+}
+
+.order-list h1 ,
+.order-list p{
+    font-size: 12px;
+}
+
+.order-btn{
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: #ffffff93; 
+    cursor: pointer; 
+}
+
+.order-btn:hover{
+    background-color: rgba(255, 192, 203, 0.397);
+    color: #ffffff;
+}
+
+.order-detail-sum{
+    background-color: #ffffff93;
+    border: 1px solid #ffffffd2;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 8px;
+    height: fit-content;
+    font-size: 14px; 
+}
+.order-detail-sum-child{
+    display: flex;
+    flex-direction: column;
+    /* gap: 10p; */
+}
+h1 {
+    font-weight: 500;
+}
+.filter-drop{
+    outline: none;
+    padding: 8px 0;
+    background-color: inherit; 
+    border-bottom: 1px solid #ffffffd2;
+}
+.filter-drop option {
+    background-color: #eefffc93;
+}
+.order-detail-sum-child ul{
+    display: grid;
+    grid-template-columns: 40% 45%;
+    justify-content: space-between;
+    /* gap: 4%; */
+    padding: 8px 0;
+    border-bottom: 1px solid #ffffffd2;
+}
+.order-item-p{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+.order-list .order-item{
+    width: 100%; 
+    padding: 8px;
+}
+.order-list .order-item-details {
+    display: flex;  
+    justify-content: space-between;
+    text-wrap: wrap;  
+}
+.order-list .order-item-img img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+} 
+
+.order-details-sec strong {
+    font-weight: 500;
+    color: rgb(30, 216, 191);
+}
+
+.order-main .order-list>ul li{
+    padding: 3px 0px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500; 
+}

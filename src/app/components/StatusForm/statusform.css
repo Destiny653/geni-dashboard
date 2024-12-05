@@ -1,0 +1,73 @@
+.form-action {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 36% 26%;
+    justify-content: center; 
+    gap: 2%;
+    color: #24353b;
+} 
+
+.form-data1{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;  
+    box-sizing: border-box;
+    padding: 40px 5%;
+    border-radius: 7px;
+    background-color: #faf8f8; 
+    border: 1px solid #ffffffb0;
+}
+.form-data2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;  
+}
+
+.form-data2-child1,
+.form-data2-child2{
+    box-sizing: border-box;
+    padding: 17px 8%;
+    background-color: #faf8f8; 
+    border-radius: 7px;
+    border: 1px solid #ffffffb0;
+}
+
+.form-data2-child1{
+    padding: 0;
+}
+
+.form-set1,
+.form-set2{
+    display: grid; 
+    grid-template-columns: 49% 49%;
+    gap: 10px;   
+}
+
+.form-action label {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-action img {
+    border-radius: 5px;
+    max-height: 260px;
+}
+
+.form-action input,
+.form-action select,
+.form-action textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #9ed2f131;
+    outline: none;
+    width: 100%;
+    border: 1px solid #cccccc;
+}
+
+.form-action .file-img{
+    padding: 7px;
+}
