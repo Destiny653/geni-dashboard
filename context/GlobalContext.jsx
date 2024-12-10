@@ -8,7 +8,7 @@ export const GlobalContext = createContext()
 
 export function GlobalProvider({children}){
 
-    const [actionPath, setActionPath] = useState('')
+    const [actionPath, setActionPath] = useState('create')
     const [updateValue, setUpdateValue] = useState({})
     const [pageName, setPageName] = useState('')
 

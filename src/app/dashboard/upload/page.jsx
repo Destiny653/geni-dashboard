@@ -6,11 +6,27 @@ import './product.css';
 import Burger from '@/app/components/Burger/Burger';
 import StatusForm from '@/app/components/StatusForm/StatusForm';
 import { GlobalContext } from '../../../../context/GlobalContext';
+import { Notyf } from 'notyf';
 
 export default function Page() {
 
   const [active, setActive] = useState(true)
-  const { setActionPath, setUpdateValue } = useContext(GlobalContext)
+  const { setActionPath, setUpdateValue, updateValue } = useContext(GlobalContext)
+  const [productId, setProductId] = useState('')
+
+  const handleDelete = async()=>{
+    const notyf = new Notyf({
+      duration: 4000,
+      position: {
+          x: 'right',
+          y: 'top'
+      }
+  })
+
+  const response = await fetch('https://geni-dashboard.onrender.com/api/category/delete/' + productId,{
+    method: 'DELETE'
+  })
+  }
 
   return (
     <div className={`relative template-p overflow-hidden`}>
@@ -46,7 +62,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -59,7 +75,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -72,7 +88,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -85,7 +101,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -98,7 +114,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -111,7 +127,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -124,7 +140,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>
@@ -137,7 +153,7 @@ export default function Page() {
                   <td>Lorem, ipsum dolor sit amet</td>
                   <td>$20</td>
                   <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' && setActive(true); setActionPath(e.target.value); setUpdateValue(); }}>
+                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
                       <option value="">Select</option>
                       <option value="delete">Delete</option>
                       <option value="update">Update</option>

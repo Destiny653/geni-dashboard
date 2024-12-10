@@ -1,3 +1,4 @@
+'use client';
 import { Notyf } from 'notyf';
 import React, { useContext, useState } from 'react';
 import './statusform.css'
@@ -5,33 +6,33 @@ import { GlobalContext } from '../../../../context/GlobalContext';
 
 export default function StatusForm() {
 
-    const { actionPath, updateValue } = useContext(GlobalContext)
+    const { actionPath, setActionPath, updateValue } = useContext(GlobalContext)
 
     const data = () => {
         if (actionPath == 'update') {
             return {
                 title: updateValue?.title,
                 price: updateValue?.price,
-                url: updateValue?.img,
+                img: updateValue?.img,
                 rate: updateValue?.rate,
                 description: updateValue?.description,
+                model: updateValue?.model
             }
         } else {
             return {
                 title: '',
                 price: 0,
-                url: 'https://via.placeholder.com/200',
+                img: 'https://via.placeholder.com/200',
                 rate: 0,
-                description: '',
-                image: null
+                description: '', 
+                model: '', 
             }
         }
     }
 
-    const [formData, SetFormData] = useState(data())
+    const [formData, SetFormData] = useState(data)
     const [error, setError] = useState(null)
-    const [success, setSuccess] = useState(false)
-    const [path, setPath] = useState('')
+    const [success, setSuccess] = useState(false) 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -48,7 +49,7 @@ export default function StatusForm() {
 
 
         try {
-            const response = await fetch('https://your-api-endpoint.com/' + actionPath + path, {
+            const response = await fetch('https://geni-backend.onrender.com/api/category/' + actionPath, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,6 +63,7 @@ export default function StatusForm() {
                 return
             }
             notyf.success("Success: " + request.message)
+            setActionPath('create')
             setSuccess(true)
             setError(null)
         } catch (error) {
@@ -74,7 +76,7 @@ export default function StatusForm() {
         if (file) {
             const reader = new FileReader()
             reader.onloadend = () => {
-                SetFormData({ ...formData, url: reader.result })
+                SetFormData({ ...formData, img: reader.result })
             }
             reader.readAsDataURL(file)
         }
@@ -83,23 +85,23 @@ export default function StatusForm() {
         SetFormData({ ...formData, [e.target.name]: e.target.value })
     }
     const handleUrlChange = (e) => {
-        const url = e.target.value;
-        SetFormData({ ...formData, url: url })
+        const img = e.target.value;
+        SetFormData({ ...formData, img: img })
     }
     const handleDrag = (e) => {
         e.preventDefault();
     }
     const handleDrop = (e) => {
         e.preventDefault();
-        const url = e.dataTransfer.getData('text/plain')
-        SetFormData({ ...formData, url: url })
+        const img = e.dataTransfer.getData('text/plain')
+        SetFormData({ ...formData, img: img })
     }
 
     const SelectedImg = () => {
-        if (formData.url) {
+        if (formData.img) {
             return (
                 <div className='flex justify-center items-center w-[full]'>
-                    <img className='w-[100%] h-[]' src={formData.url} alt={formData.title} />
+                    <img className='w-[100%] h-[]' src={formData.img} alt={formData.title} />
                 </div>
             )
         }
@@ -107,18 +109,18 @@ export default function StatusForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className='form-action'>
+            <form onSubmit={handleSubmit} className='form-action' encType="multipart/form-data">
                 <section className='relative form-data1'>
-                    {error && <p className='top-[3px] absolute font-[500] text-[#b64037] text-[18px]'>{error}</p>}
+                    {error && <p className='top-[3px] absolute font-[400] text-[#f13d30] text-[15px]'>{error}</p>}
                     {success && <p className='top-[3px] absolute text-[#339944]'>Form submitted successfully</p>}
                     <div className='form-set2'>
                         <label htmlFor="image" className='flex flex-col'>
                             <span>Image</span>
-                            <input className='file-img' type="file" name="image" accept="image/*" onChange={handleFileChange} />
+                            <input className='file-img' type="file" name="img" accept="image/*" onChange={handleFileChange} />
                         </label>
                         <label htmlFor="imgurl" className='flex flex-col'>
                             <span>Image URL</span>
-                            <input type="text" name="url" onChange={handleUrlChange} onDrag={handleDrag} onDrop={handleDrop} placeholder='Drag and drop your url here' />
+                            <input type="text" name="img" onChange={handleUrlChange} onDrag={handleDrag} onDrop={handleDrop} placeholder='Drag and drop your url here' />
                         </label>
                     </div>
                     <label htmlFor="title" className='flex flex-col'>
@@ -135,13 +137,13 @@ export default function StatusForm() {
                             <input type="number" name="rate" value={formData.rate} onChange={handleChange} />
                         </label>
                     </div>
-                    <select name="path" id="" onChange={(e) => setPath(e.target.value)}>
+                    <select name="model" id="" value={formData.model} onChange={handleChange}>
                         <option value="" disabled="disabled">Select Category</option>
-                        <option value="/valies">Valies</option>
-                        <option value="/cloth">Cloths</option>
-                        <option value="/shoe">Shoes</option>
-                        <option value="/bath">Bath</option>
-                        <option value="/under-wear">Under wear</option>
+                        <option value="valies">Valies</option>
+                        <option value="clothing">Cloths</option>
+                        <option value="shoe">Shoes</option>
+                        <option value="bath">Bath</option>
+                        <option value="underwear">Under wear</option>
                     </select>
 
                 </section>
