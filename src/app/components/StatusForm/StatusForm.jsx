@@ -49,7 +49,7 @@ export default function StatusForm() {
 
 
         try {
-            const response = await fetch('https://geni-backend.onrender.com/api/category/' + actionPath, {
+            const response = await fetch('http://localhost:3000/api/category/' + actionPath, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -109,7 +109,7 @@ export default function StatusForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className='form-action' encType="multipart/form-data">
+            <form action={'https://geni-backend.onrender.com/api/category/create'} method='POST'  className='form-action' encType="multipart/form-data">
                 <section className='relative form-data1'>
                     {error && <p className='top-[3px] absolute font-[400] text-[#f13d30] text-[15px]'>{error}</p>}
                     {success && <p className='top-[3px] absolute text-[#339944]'>Form submitted successfully</p>}
@@ -139,11 +139,11 @@ export default function StatusForm() {
                     </div>
                     <select name="model" id="" value={formData.model} onChange={handleChange}>
                         <option value="" disabled="disabled">Select Category</option>
-                        <option value="valies">Valies</option>
-                        <option value="clothing">Cloths</option>
-                        <option value="shoe">Shoes</option>
-                        <option value="bath">Bath</option>
-                        <option value="underwear">Under wear</option>
+                        <option value="Valies">Valies</option>
+                        <option value="Clothing">Cloths</option>
+                        <option value="Shoe">Shoes</option>
+                        <option value="Bath">Bath</option>
+                        <option value="Underwear">Under wear</option>
                     </select>
 
                 </section>
