@@ -67,7 +67,7 @@ export default function StatusForm() {
         })    
 
         try {
-            const response = await fetch("https://geni-backend.onrender.com/api/category/" + actionPath, {
+            const response = await fetch("http://localhost:3000/api/category/" + actionPath, {
                 method: 'POST', 
                 body: uploadData
             })

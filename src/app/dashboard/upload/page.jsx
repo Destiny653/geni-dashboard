@@ -27,7 +27,7 @@ export default function Page() {
 
     try { 
       
-    const response = await fetch('https://geni-backend.onrender.com/api/category')
+    const response = await fetch('http://localhost:3000/api/category')
     const req = await response.json()
     if(!response.ok){
       notyf.error(req.message)
@@ -64,7 +64,7 @@ export default function Page() {
       }
   })
    try {
-    const response = await fetch('https://geni-backend.onrender.com/api/category/' + id,{
+    const response = await fetch('http://localhost:3000/api/category/' + id,{
       method: 'DELETE'
     })
     const req = await response.json()
@@ -115,7 +115,7 @@ export default function Page() {
                       <td>{item.description}</td>
                       <td>{item.price}</td>
                       <td>
-                        <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id+'/'+item.model); setActionPath(e.target.value == 'update' && `update/${item._id}` ); setUpdateValue(item); }}>
+                        <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id+'/'+item.model); setActionPath(e.target.value == 'update' && `${item._id}/${item.model}` ); setUpdateValue(item); }}>
                           <option value="">Select</option>
                           <option value="delete">Delete</option>
                           <option value="update">Update</option>
