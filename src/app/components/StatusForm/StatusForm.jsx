@@ -57,17 +57,20 @@ export default function StatusForm() {
 
 
         try {
-            const response = await fetch("https://geni-backend.onrender/api/category/" + actionPath, {
+            const response = await fetch("https://geni-backend.onrender.com/api/category/" + actionPath, {
                 method: 'POST', 
                 body: uploadData
             })
 
             const request = await response.json()
             if (!response.ok) { 
-                notyf.error("Error: " + request.message)
+                console.log("request: ", JSON.stringify(request), JSON.stringify(response) );
+                
+                notyf.error(request.message)
                 return
             } 
-            notyf.success("Success: " + request.message)  // Show success message
+            console.log("request2: ", JSON.stringify(request), JSON.stringify(response) );
+            notyf.success(request.message)  // Show success message
             setActionPath('create')
             setSuccess(true)
             setError(null)
