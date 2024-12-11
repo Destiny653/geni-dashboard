@@ -1,20 +1,22 @@
 'use client'
 import { NavTemplate, Template } from '@/app/components/Template/Template'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../components/Template/template.css'
 import './product.css';
 import Burger from '@/app/components/Burger/Burger';
 import StatusForm from '@/app/components/StatusForm/StatusForm';
 import { GlobalContext } from '../../../../context/GlobalContext';
 import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css'; 
 
 export default function Page() {
 
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState(false)
   const { setActionPath, setUpdateValue, updateValue } = useContext(GlobalContext)
   const [productId, setProductId] = useState('')
+  const [data, setData] = useState([])
 
-  const handleDelete = async()=>{
+  const fetchData = async () => {
     const notyf = new Notyf({
       duration: 4000,
       position: {
@@ -23,9 +25,58 @@ export default function Page() {
       }
   })
 
-  const response = await fetch('https://geni-dashboard.onrender.com/api/category/delete/' + productId,{
-    method: 'DELETE'
+    try { 
+      
+    const response = await fetch('https://geni-backend.onrender.com/api/category')
+    const req = await response.json()
+    if(!response.ok){
+      notyf.error(req.message)
+      return
+    }
+    setData(req)
+    } catch (error) { 
+      notyf.error('Error: ',error.message)
+    }
+  }
+
+  console.log("Data: ",data);
+  
+
+  useEffect(() => {
+ 
+    fetchData()
+    const style = document.createElement('style');
+    style.textContent = `
+        .notyf__toast {
+            border-radius: 12px !important;
+        }
+    `;
+    document.head.append(style);
+    return () => style.remove(); // Clean up on component unmount
+}, [ ]);
+
+  const handleDelete = async(id)=>{
+    const notyf = new Notyf({
+      duration: 4000,
+      position: {
+          x: 'right',
+          y: 'top'
+      }
   })
+   try {
+    const response = await fetch('https://geni-backend.onrender.com/api/category/' + id,{
+      method: 'DELETE'
+    })
+    const req = await response.json()
+    if (!response.ok) {
+      notyf.error(req.message)
+    } 
+    notyf.success(req.message)  
+    fetchData()
+   } catch (error) { 
+    console.error(error)
+    notyf.error('Error: ', error.message)
+   }
   }
 
   return (
@@ -49,117 +100,30 @@ export default function Page() {
               <thead className='font-[500]'>
                 <tr>
                   <th>Title</th>
-                  <th>Quantity</th>
+                  <th>Rate</th>
                   <th>Description</th>
                   <th>Price</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr className='' >
-                  <td>T-shirt</td>
-                  <td>10</td>
-                  <td>Lorem, ipsum dolor sit amet</td>
-                  <td>$20</td>
-                  <td>
-                    <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : setProductId(); setActionPath(e.target.value == 'update' && 'update' ); setUpdateValue(); }}>
-                      <option value="">Select</option>
-                      <option value="delete">Delete</option>
-                      <option value="update">Update</option>
-                    </select>
-                  </td>
-                </tr>
+                {
+                  data?.data?.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.title}</td>
+                      <td>{item.rate}</td>
+                      <td>{item.description}</td>
+                      <td>{item.price}</td>
+                      <td>
+                        <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id+'/'+item.model); setActionPath(e.target.value == 'update' && `update/${item._id}` ); setUpdateValue(item); }}>
+                          <option value="">Select</option>
+                          <option value="delete">Delete</option>
+                          <option value="update">Update</option>
+                        </select>
+                      </td>
+                    </tr>
+                  ))
+                } 
               </tbody>
             </table>
           </section>

@@ -22,6 +22,10 @@ body {
   padding: 3px;
 }
 
+.notyf__toast {
+  border-radius: 15px;
+}
+
 .theme-panel li { 
   width: 18px;
   height: 18px;

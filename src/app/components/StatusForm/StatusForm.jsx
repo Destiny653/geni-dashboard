@@ -1,6 +1,7 @@
 'use client';
 import { Notyf } from 'notyf';
-import React, { useContext, useState } from 'react';
+import 'notyf/notyf.min.css'; 
+import React, { useContext, useEffect, useState } from 'react';
 import './statusform.css'
 import { GlobalContext } from '../../../../context/GlobalContext';
 
@@ -29,11 +30,23 @@ export default function StatusForm() {
             }
         }
     }
+ 
+    useEffect(() => {
+        const style = document.createElement('style');
+        style.textContent = `
+            .notyf__toast {
+                border-radius: 12px !important;
+            }
+        `;
+        document.head.append(style);
+        return () => style.remove(); // Clean up on component unmount
+    }, []);
 
     const [formData, setFormData] = useState(data)
     const [urls, setUrls]=  useState("https://via.placeholder.com/200")
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(false) 
+    const [sucmessage, setSucmessage] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -51,10 +64,7 @@ export default function StatusForm() {
                 x: 'right',
                 y: 'top'
             }
-        })
-
-        console.log("Dataset: " + JSON.stringify(e.target.dataset));
-
+        })    
 
         try {
             const response = await fetch("https://geni-backend.onrender.com/api/category/" + actionPath, {
@@ -64,17 +74,21 @@ export default function StatusForm() {
 
             const request = await response.json()
             if (!response.ok) { 
-                console.log("request: ", JSON.stringify(request), JSON.stringify(response) );
                 
                 notyf.error(request.message)
+                setError(request.message)
+                setSucmessage('')
                 return
-            } 
-            console.log("request2: ", JSON.stringify(request), JSON.stringify(response) );
+            }   
+            setError('')
+            setSucmessage(request.message)
             notyf.success(request.message)  // Show success message
             setActionPath('create')
             setSuccess(true)
             setError(null)
         } catch (error) {
+            setSucmessage('')
+            notyf.error(error.message)
             setError(error.message)
         }
     }
@@ -96,6 +110,7 @@ export default function StatusForm() {
     const handleUrlChange = (e) => {
         const img = e.target.value;
         setFormData({ ...formData, img: img })
+        setUrls(img)
     }
     const handleDrag = (e) => {
         e.preventDefault();
@@ -118,10 +133,10 @@ export default function StatusForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}  className='form-action'>
+            <form onSubmit={handleSubmit} className='form-action'>
                 <section className='relative form-data1'>
                     {error && <p className='top-[3px] absolute font-[400] text-[#f13d30] text-[15px]'>{error}</p>}
-                    {success && <p className='top-[3px] absolute text-[#339944]'>Form submitted successfully</p>}
+                    {success && <p className='top-[3px] absolute text-[#339944]'>{sucmessage}</p>}
                     <div className='form-set2'>
                         <label htmlFor="image" className='flex flex-col'>
                             <span>Image</span>
