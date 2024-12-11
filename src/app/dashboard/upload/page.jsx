@@ -27,7 +27,7 @@ export default function Page() {
 
     try { 
       
-    const response = await fetch('http://localhost:3000/api/category')
+    const response = await fetch('https://geni-backend.onrender.com/api/category')
     const req = await response.json()
     if(!response.ok){
       notyf.error(req.message)
@@ -64,7 +64,7 @@ export default function Page() {
       }
   })
    try {
-    const response = await fetch('http://localhost:3000/api/category/' + id,{
+    const response = await fetch('https://geni-backend.onrender.com/api/category/' + id,{
       method: 'DELETE'
     })
     const req = await response.json()
