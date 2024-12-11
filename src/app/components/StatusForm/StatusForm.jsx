@@ -30,12 +30,20 @@ export default function StatusForm() {
         }
     }
 
-    const [formData, SetFormData] = useState(data)
+    const [formData, setFormData] = useState(data)
+    const [urls, setUrls]=  useState("https://via.placeholder.com/200")
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(false) 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const uploadData = new FormData()  
+        uploadData.append('title', formData.title)
+        uploadData.append('price', formData.price)
+        uploadData.append('img', formData.img)
+        uploadData.append('rate', formData.rate)
+        uploadData.append('description', formData.description)
+        uploadData.append('model', formData.model)
 
         const notyf = new Notyf({
             duration: 4000,
@@ -49,20 +57,17 @@ export default function StatusForm() {
 
 
         try {
-            const response = await fetch('http://localhost:3000/api/category/' + actionPath, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
+            const response = await fetch("https://geni-backend.onrender/api/category" + actionPath, {
+                method: 'POST', 
+                body: uploadData
             })
 
             const request = await response.json()
-            if (!response.ok) {
+            if (!response.ok) { 
                 notyf.error("Error: " + request.message)
                 return
-            }
-            notyf.success("Success: " + request.message)
+            } 
+            notyf.success("Success: " + request.message)  // Show success message
             setActionPath('create')
             setSuccess(true)
             setError(null)
@@ -76,17 +81,18 @@ export default function StatusForm() {
         if (file) {
             const reader = new FileReader()
             reader.onloadend = () => {
-                SetFormData({ ...formData, img: reader.result })
+                setFormData({...formData, img:  file })
+                setUrls(reader.result)
             }
             reader.readAsDataURL(file)
         }
     }
     const handleChange = (e) => {
-        SetFormData({ ...formData, [e.target.name]: e.target.value })
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
     const handleUrlChange = (e) => {
         const img = e.target.value;
-        SetFormData({ ...formData, img: img })
+        setFormData({ ...formData, img: img })
     }
     const handleDrag = (e) => {
         e.preventDefault();
@@ -94,14 +100,14 @@ export default function StatusForm() {
     const handleDrop = (e) => {
         e.preventDefault();
         const img = e.dataTransfer.getData('text/plain')
-        SetFormData({ ...formData, img: img })
+        setFormData({ ...formData, img: img })
     }
 
     const SelectedImg = () => {
-        if (formData.img) {
+        if (urls) {
             return (
                 <div className='flex justify-center items-center w-[full]'>
-                    <img className='w-[100%] h-[]' src={formData.img} alt={formData.title} />
+                    <img className='w-[100%] h-[]' src={urls} alt={formData.title} />
                 </div>
             )
         }
@@ -109,7 +115,7 @@ export default function StatusForm() {
 
     return (
         <>
-            <form action={'https://geni-backend.onrender.com/api/category/create'} method='POST'  className='form-action' encType="multipart/form-data">
+            <form onSubmit={handleSubmit}  className='form-action'>
                 <section className='relative form-data1'>
                     {error && <p className='top-[3px] absolute font-[400] text-[#f13d30] text-[15px]'>{error}</p>}
                     {success && <p className='top-[3px] absolute text-[#339944]'>Form submitted successfully</p>}
