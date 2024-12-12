@@ -7,43 +7,45 @@ import Burger from '@/app/components/Burger/Burger';
 import StatusForm from '@/app/components/StatusForm/StatusForm';
 import { GlobalContext } from '../../../../context/GlobalContext';
 import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css'; 
+import 'notyf/notyf.min.css';
 
 export default function Page() {
 
   const [active, setActive] = useState(false)
   const { setActionPath, setUpdateValue, updateValue } = useContext(GlobalContext)
-  const [productId, setProductId] = useState('')
+  const [filter, setFilter] = useState('all')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10;
   const [data, setData] = useState([])
 
   const fetchData = async () => {
     const notyf = new Notyf({
       duration: 4000,
       position: {
-          x: 'right',
-          y: 'top'
+        x: 'right',
+        y: 'top'
       }
-  })
+    })
 
-    try { 
-      
-    const response = await fetch('https://geni-backend.onrender.com/api/category')
-    const req = await response.json()
-    if(!response.ok){
-      notyf.error(req.message)
-      return
-    }
-    setData(req)
-    } catch (error) { 
-      notyf.error('Error: ',error.message)
+    try {
+
+      const response = await fetch('https://geni-backend.onrender.com/api/category')
+      const req = await response.json()
+      if (!response.ok) {
+        notyf.error(req.message)
+        return
+      }
+      setData(req)
+    } catch (error) {
+      notyf.error('Error: ', error.message)
     }
   }
 
-  console.log("Data: ",data);
-  
+  console.log("Data: ", data);
+
 
   useEffect(() => {
- 
+
     fetchData()
     const style = document.createElement('style');
     style.textContent = `
@@ -53,31 +55,35 @@ export default function Page() {
     `;
     document.head.append(style);
     return () => style.remove(); // Clean up on component unmount
-}, [ ]);
+  }, []);
 
-  const handleDelete = async(id)=>{
+  const handleDelete = async (id) => {
     const notyf = new Notyf({
       duration: 4000,
       position: {
-          x: 'right',
-          y: 'top'
+        x: 'right',
+        y: 'top'
       }
-  })
-   try {
-    const response = await fetch('https://geni-backend.onrender.com/api/category/' + id,{
-      method: 'DELETE'
     })
-    const req = await response.json()
-    if (!response.ok) {
-      notyf.error(req.message)
-    } 
-    notyf.success(req.message)  
-    fetchData()
-   } catch (error) { 
-    console.error(error)
-    notyf.error('Error: ', error.message)
-   }
+    try {
+      const response = await fetch('https://geni-backend.onrender.com/api/category/' + id, {
+        method: 'DELETE'
+      })
+      const req = await response.json()
+      if (!response.ok) {
+        notyf.error(req.message)
+      }
+      notyf.success(req.message)
+      fetchData()
+    } catch (error) {
+      console.error(error)
+      notyf.error('Error: ', error.message)
+    }
   }
+
+  const filterdData = filter == 'all' ? data.data : data?.data?.filter((item) => item.model == filter)
+  const totalPages = Math.ceil(filterdData?.length / itemsPerPage)
+  const displayedData = filterdData?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   return (
     <div className={`relative template-p overflow-hidden`}>
@@ -95,50 +101,70 @@ export default function Page() {
       <section className='flex flex-col gap-[20px]'>
         <NavTemplate path={'Dashboard/Products'} />
         <div className='flex justify-between gap-[1.5%]'>
-          <section className='flex flex-col w-[80%] product-list'>
-            <table>
-              <thead className='font-[500]'>
-                <tr>
-                  <th>Title</th>
-                  <th>Rate</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  data?.data?.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.title}</td>
-                      <td>{item.rate}</td>
-                      <td>{item.description}</td>
-                      <td>{item.price}</td>
-                      <td>
-                        <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id+'/'+item.model); setActionPath(e.target.value == 'update' && `${item._id}/${item.model}` ); setUpdateValue(item); }}>
-                          <option value="">Select</option>
-                          <option value="delete">Delete</option>
-                          <option value="update">Update</option>
-                        </select>
-                      </td>
-                    </tr>
-                  ))
-                } 
-              </tbody>
-            </table>
+          <section className='flex flex-col w-[80%]'>
+            <section className='flex flex-col w-[100%] product-list'>
+              <table>
+                <thead className='font-[500]'>
+                  <tr>
+                    <th>Title</th>
+                    <th>Rate</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    displayedData?.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.title}</td>
+                        <td>{item.rate}</td>
+                        <td>{item.description}</td>
+                        <td>{item.price}</td>
+                        <td>
+                          <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id + '/' + item.model); setActionPath(e.target.value == 'update' && `${item._id}/${item.model}`); setUpdateValue(item); }}>
+                            <option value="">Select</option>
+                            <option value="delete">Delete</option>
+                            <option value="update">Update</option>
+                          </select>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </section>
+            <div className={'flex justify-between'}>
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+                className={'paginate-btn'}
+              >
+                Prev
+              </button>
+              <span>Page {currentPage} of {totalPages}</span>
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+                className={'paginate-btn'}
+              >
+                Next
+              </button>
+            </div>
           </section>
           <section className='flex flex-col gap-[15px] w-[20%]'>
             <section className='category-bar'>
               <h1 className='font-[500]'>Category list</h1>
               <ul className='category-list'>
-                <li><input type="checkbox" name="" id="" /><span>Valies</span></li>
-                <li><input type="checkbox" name="" id="" /><span>Cloths</span></li>
-                <li><input type="checkbox" name="" id="" /><span>Shoes</span></li>
-                <li><input type="checkbox" name="" id="" /><span>Bath</span></li>
-                <li> <input type="checkbox" name="" id="" /><span>Under wear</span></li>
+                <li><input type='radio' name="" id="" checked value={"all"} onChange={(e) => setFilter(e.target.value)} /><span>All</span></li>
+                <li><input type='radio' name="" id="" value={'Valies'} onChange={(e) => setFilter(e.target.value)} /><span>Valies</span></li>
+                <li><input type='radio' name="" id="" value={'Clothing'} onChange={(e) => setFilter(e.target.value)} /><span>Cloths</span></li>
+                <li><input type='radio' name="" id="" value={'Shoes'} onChange={(e) => setFilter(e.target.value)} /><span>Shoes</span></li>
+                <li><input type='radio' name="" id="" value={'Bath'} onChange={(e) => setFilter(e.target.value)} /><span>Bath</span></li>
+                <li> <input type='radio' name="" id="" value={'Underwear'} onChange={(e) => setFilter(e.target.value)} /><span>Under wear</span></li>
               </ul>
             </section>
-            <button className='cate-bar-btn' onClick={() => setActive(true)}>
+            <button className='w-full cate-bar-btn' onClick={() => setActive(true)}>
               Add New Product
             </button>
           </section>

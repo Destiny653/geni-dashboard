@@ -71,8 +71,7 @@
     padding: 5px 6px;
 }
 
-.cate-bar-btn {
-    width: 100%;
+.cate-bar-btn { 
     padding: 6px 0;
     font-size: 14px;
     border-radius: 5px;
@@ -81,7 +80,16 @@
 
 }
 
-.cate-bar-btn:hover {
+.paginate-btn{
+    padding: 6px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #9ed2f131;
+    border: 1px solid #ffffffbd;
+}
+
+.cate-bar-btn:hover,
+.paginate-btn:hover {
     background-color: #176bc5;
     color: #ffffff;
 }
