@@ -122,7 +122,7 @@ export default function Page() {
                         <td>{item.description}</td>
                         <td>{item.price}</td>
                         <td>
-                          <select className='flex justify-center items-center action' name="" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id + '/' + item.model); setActionPath(e.target.value == 'update' && `${item._id}/${item.model}`); setUpdateValue(item); }}>
+                          <select className='flex justify-center items-center action' name="group" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id + '/' + item.model); setActionPath(e.target.value == 'update' && `${item._id}/${item.model}`); setUpdateValue(item); }}>
                             <option value="">Select</option>
                             <option value="delete">Delete</option>
                             <option value="update">Update</option>
@@ -156,12 +156,12 @@ export default function Page() {
             <section className='category-bar'>
               <h1 className='font-[500]'>Category list</h1>
               <ul className='category-list'>
-                <li><input type='radio' name="" id="" checked value={"all"} onChange={(e) => setFilter(e.target.value)} /><span>All</span></li>
-                <li><input type='radio' name="" id="" value={'Valies'} onChange={(e) => setFilter(e.target.value)} /><span>Valies</span></li>
-                <li><input type='radio' name="" id="" value={'Clothing'} onChange={(e) => setFilter(e.target.value)} /><span>Cloths</span></li>
-                <li><input type='radio' name="" id="" value={'Shoes'} onChange={(e) => setFilter(e.target.value)} /><span>Shoes</span></li>
-                <li><input type='radio' name="" id="" value={'Bath'} onChange={(e) => setFilter(e.target.value)} /><span>Bath</span></li>
-                <li> <input type='radio' name="" id="" value={'Underwear'} onChange={(e) => setFilter(e.target.value)} /><span>Under wear</span></li>
+                <li><input type='radio' name="group" id="" value={"all"} onChange={(e) => setFilter(e.target.value)} /><span>All</span></li>
+                <li><input type='radio' name="group" id="" value={'Valies'} onChange={(e) => setFilter(e.target.value)} /><span>Valies</span></li>
+                <li><input type='radio' name="group" id="" value={'Clothing'} onChange={(e) => setFilter(e.target.value)} /><span>Cloths</span></li>
+                <li><input type='radio' name="group" id="" value={'Shoes'} onChange={(e) => setFilter(e.target.value)} /><span>Shoes</span></li>
+                <li><input type='radio' name="group" id="" value={'Bath'} onChange={(e) => setFilter(e.target.value)} /><span>Bath</span></li>
+                <li><input type='radio' name="group" id="" value={'Underwear'} onChange={(e) => setFilter(e.target.value)} /><span>Under wear</span></li>
               </ul>
             </section>
             <button className='w-full cate-bar-btn' onClick={() => setActive(true)}>
