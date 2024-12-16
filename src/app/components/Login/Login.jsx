@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import Theme from '../Theme/Theme';
 import './login.css';
 import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css'; 
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
 
@@ -12,13 +14,14 @@ export default function Login() {
     }
 
     const [formData, SetFormData] = useState(data)
+    const navigation = useRouter()
 
     const handleChange = (e) => {
         SetFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = async () => {
-
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         const notyf = new Notyf({
             duration: 4000,
             position: {
@@ -38,7 +41,11 @@ export default function Login() {
             if (!response.ok) {
                 notyf.error(request.message)
             }
-            notyf.success(request.message)
+            if(request.data.role == "admin"){
+                localStorage.setItem('adminData',JSON.stringify({role:request.data.role, token:request.token}))
+                notyf.success(request.message)
+                navigation.push('/dashboard/client')
+            }
         } catch (error) {
             notyf.error("Error:" + error.message)
         }

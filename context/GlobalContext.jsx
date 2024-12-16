@@ -11,7 +11,6 @@ export function GlobalProvider({children}){
     const [actionPath, setActionPath] = useState('create')
     const [updateValue, setUpdateValue] = useState({})
     const [pageName, setPageName] = useState('')
-
     return(
         <GlobalContext.Provider value={{actionPath, updateValue,pageName, setPageName, setUpdateValue, setActionPath}}>
             {children}

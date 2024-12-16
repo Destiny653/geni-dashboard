@@ -1,6 +1,6 @@
 'use client'
 import { NavTemplate, Template } from '@/app/components/Template/Template'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../components/Template/template.css'
 import './client.css';
 import Burger from '@/app/components/Burger/Burger';
@@ -8,11 +8,18 @@ import StatusForm from '@/app/components/StatusForm/StatusForm';
 import { GlobalContext } from '../../../../context/GlobalContext';
 import { FaUser } from "react-icons/fa6";
 import OrderDetail from '@/app/components/OrderDetail/orderdetail';
+import { useRouter } from 'next/navigation';
 export default function Page() {
 
   const [active, setActive] = useState(true)
   const { setActionPath, setUpdateValue } = useContext(GlobalContext)
-
+  const navigation = useRouter()
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("adminData"))
+    token = token?.token;
+    token ?? navigation.push('/')
+    console.log("token: ", token);
+  },[])
   return (
     <div className={`relative template-p overflow-hidden`}>
       <section className={`fixed top-0 left-0 h-[100vh] w-[100vw] z-[5] ${!active ? 'dashboard-close' : "dashboard-open"}`}>

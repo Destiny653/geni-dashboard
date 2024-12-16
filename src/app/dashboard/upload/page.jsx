@@ -8,6 +8,7 @@ import StatusForm from '@/app/components/StatusForm/StatusForm';
 import { GlobalContext } from '../../../../context/GlobalContext';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
 
@@ -17,6 +18,13 @@ export default function Page() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10;
   const [data, setData] = useState([])
+  const navigation = useRouter()
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("adminData"))
+    token = token?.token;
+    token ?? navigation.push('/')
+    console.log("token: ", token);
+  },[])
 
   const fetchData = async () => {
     const notyf = new Notyf({

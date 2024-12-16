@@ -1,18 +1,27 @@
 'use client'
 import { NavTemplate, Template } from '@/app/components/Template/Template'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../components/Template/template.css'
 import './command.css';
 import { GlobalContext } from '../../../../context/GlobalContext';
 import { FaUser } from "react-icons/fa6";
+import { useRouter } from 'next/navigation';
 export default function Page() {
 
   const [active, setActive] = useState(true)
   const { setActionPath, setUpdateValue } = useContext(GlobalContext)
+  const navigation = useRouter()
+   useEffect(()=>{
+    window.location.reload();
+    let token = JSON.parse(localStorage.getItem("adminData"))
+    token = token?.token;
+    token ?? navigation.push('/')
+    console.log("token: ",token);
+    },[])
 
   return (
     <div className={`relative template-p overflow-hidden`}>
-      <section className='top-0 left-0 sticky'>
+      <section className='h-full'>
         <Template />
       </section>
       <section className='flex flex-col gap-[20px]'>
@@ -357,7 +366,7 @@ export default function Page() {
               </section>
             </details>
           </section>
-          <section className='order-detail-sum'>
+          <section className='top-0 sticky order-detail-sum'>
             <h1>Order summary</h1>
             <div className='order-detail-sum-child'>
               <ul>

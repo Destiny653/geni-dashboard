@@ -17,13 +17,16 @@ import { FaBell } from "react-icons/fa6";
 import { MdLiveHelp } from "react-icons/md";
 import { GlobalContext } from '../../../../context/GlobalContext';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export function Template() {
+
+    const navigation = useRouter()
     
     return (
 
-        <section className='top-0 left-0 sticky h-[100%]'>
-            <div className='box-border flex flex-col justify-between items-start h-[100%] side-bar'>
+        <section className='top-0 sticky'>
+            <div className='box-border flex flex-col justify-between items-start h-[100vh] side-bar'>
                 <section className='box-border flex flex-col gap-[60px] pt-[30px] w-full'>
                     <h1 className='font-[500]'>Dashboard</h1>
                     <ul className='template-nav'>
@@ -48,7 +51,7 @@ export function Template() {
                         <li>
                             <Link href='/dashboard/client'>
                                 <HiUsers className='text-[18px]' />
-                                <span>Clinets</span>
+                                <span>Clients</span>
                             </Link>
                         </li>
                         <li>
@@ -65,7 +68,9 @@ export function Template() {
                         </li>
                     </ul>
                 </section>
-                <button className='btn-logout'>
+                <button className='btn-logout'
+                onClick={()=>{ localStorage.removeItem('adminData'); navigation.push('/')}} 
+                >
                     <AiOutlineLogout  className='text-[18px]' />
                     <span>Logout</span>
                 </button>
