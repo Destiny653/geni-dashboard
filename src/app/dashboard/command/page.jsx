@@ -11,8 +11,7 @@ export default function Page() {
   const [active, setActive] = useState(true)
   const { setActionPath, setUpdateValue } = useContext(GlobalContext)
   const navigation = useRouter()
-   useEffect(()=>{
-    window.location.reload();
+   useEffect(()=>{ 
     let token = JSON.parse(localStorage.getItem("adminData"))
     token = token?.token;
     token ?? navigation.push('/')
