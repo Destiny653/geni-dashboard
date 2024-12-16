@@ -41,7 +41,7 @@ export default function Login() {
             if (!response.ok) {
                 notyf.error(request.message)
             }
-            if(request.data.role == "admin"){
+            if(request?.data?.role == "admin"){
                 localStorage.setItem('adminData',JSON.stringify({role:request.data.role, token:request.token}))
                 notyf.success(request.message)
                 navigation.push('/dashboard/client')
