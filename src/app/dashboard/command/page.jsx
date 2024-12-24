@@ -46,10 +46,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </li>
-                  <li>$360.00</li>
+                  <li className='special-color'>$360.00</li>
                   <li>2022-03-20</li>
                   <li>12:00:00</li>
-                  <li>Pending</li>
+                  <li className='special-color2'>Pending</li>
                 </ul>
               </summary>
               <section className='order-item-p'>
@@ -101,10 +101,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </li>
-                  <li>$360.00</li>
+                  <li className='special-color'>$360.00</li>
                   <li>2022-03-20</li>
                   <li>12:00:00</li>
-                  <li>Pending</li>
+                  <li className='special-color2'>Pending</li>
                 </ul>
               </summary>
               <section className='order-item-p'>
@@ -156,10 +156,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </li>
-                  <li>$360.00</li>
+                  <li className='special-color'>$360.00</li>
                   <li>2022-03-20</li>
                   <li>12:00:00</li>
-                  <li>Pending</li>
+                  <li className='special-color2'>Pending</li>
                 </ul>
               </summary>
               <section className='order-item-p'>
@@ -211,10 +211,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </li>
-                  <li>$360.00</li>
+                  <li className='special-color'>$360.00</li>
                   <li>2022-03-20</li>
                   <li>12:00:00</li>
-                  <li>Pending</li>
+                  <li className='special-color2'>Pending</li>
                 </ul>
               </summary>
               <section className='order-item-p'>
@@ -266,10 +266,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </li>
-                  <li>$360.00</li>
+                  <li className='special-color'>$360.00</li>
                   <li>2022-03-20</li>
                   <li>12:00:00</li>
-                  <li>Pending</li>
+                  <li className='special-color2'>Pending</li>
                 </ul>
               </summary>
               <section className='order-item-p'>
@@ -321,10 +321,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </li>
-                  <li>$360.00</li>
+                  <li className='special-color'>$360.00</li>
                   <li>2022-03-20</li>
                   <li>12:00:00</li>
-                  <li>Pending</li>
+                  <li className='special-color2'>Pending</li>
                 </ul>
               </summary>
               <section className='order-item-p'>
@@ -376,12 +376,6 @@ export default function Page() {
                 <li>Valies</li>
                 <li>$500</li>
               </ul>
-              <select className='w-full filter-drop'>
-                <option value="all">All</option>
-                <option value="completed">Completed</option>
-                <option value="pending">Pending</option>
-                <option value="canceled">Canceled</option>
-              </select>
               <ul>
                 <li>Total</li>
                 <li>$500</li>
@@ -394,6 +388,12 @@ export default function Page() {
                 <li>Subtotal</li>
                 <li>$550</li>
               </ul>
+              <select className='w-full filter-drop'>
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+                <option value="canceled">Canceled</option>
+              </select>
             </div>
           </section>
         </div>

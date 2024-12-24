@@ -19,8 +19,21 @@
     text-wrap: nowrap;
     box-sizing: border-box;
     cursor: pointer;
-    padding: 3px 10px;
+    padding: 0px 10px;
     border-bottom: 1px solid rgba(139, 190, 206, 0.205);
+}
+.special-color{
+    background-color: rgba(0, 255, 0, 0.103);
+    background-color: rgba(166, 255, 0, 0.253);
+    border-radius: 18px;
+    padding: 4px 30px;
+    width: fit-content;
+}
+.special-color2{
+    background-color: rgba(255, 178, 191, 0.233);
+    border-radius: 18px;
+    padding: 4px 10px;
+    width: fit-content;
 }
 
 .order-list ul:nth-child(1){
@@ -52,14 +65,14 @@
     background-color: #ffffff93;
     border: 1px solid #ffffffd2;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 20px 10px;
     border-radius: 8px;
     height: fit-content;
     font-size: 14px; 
 }
 .order-detail-sum-child{
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     /* gap: 10p; */
 }
 h1 {
@@ -67,13 +80,10 @@ h1 {
 }
 .filter-drop{
     outline: none;
-    padding: 8px 0;
-    background-color: inherit; 
+    padding: 8px 0; 
+    background-color: #cfe7f717;
     border-bottom: 1px solid #ffffffd2;
-}
-.filter-drop option {
-    background-color: #eefffc93;
-}
+} 
 .order-detail-sum-child ul{
     display: grid;
     grid-template-columns: 40% 45%;

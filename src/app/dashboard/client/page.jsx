@@ -11,7 +11,7 @@ import OrderDetail from '@/app/components/OrderDetail/orderdetail';
 import { useRouter } from 'next/navigation';
 export default function Page() {
 
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(true)
   const { setActionPath, setUpdateValue } = useContext(GlobalContext)
   const navigation = useRouter()
   useEffect(() => {
@@ -58,10 +58,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -73,10 +73,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -88,10 +88,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -103,10 +103,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -118,10 +118,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -133,10 +133,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -148,10 +148,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -163,10 +163,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
                 <tr>
                   <td className='flex items-center gap-[7px] jc'>
@@ -178,10 +178,10 @@ export default function Page() {
                       <p>megalone@gamil.com</p>
                     </div>
                   </td>
-                  <td>0789876543</td>
+                  <td><span className='special-color'>0789876543</span></td>
                   <td>2022-03-20</td>
                   <td>This is a sample comment</td>
-                  <td className='client-btn' onClick={() => setActive(true)}>Detail</td>
+                  <td className='client-btn' onClick={() => setActive(true)}><span className='special-color2'>Details</span></td>
                 </tr>
               </tbody>
             </table>
