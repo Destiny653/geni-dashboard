@@ -1,34 +1,50 @@
  .order-detail-p{
-    width: 70%;
+    width: 80%;
     /* height: 500px; */
-    background-color: #f9f9f9;
+    background-color: #fff;
+    /* background-color:#d9fdeb;  */
     display: grid;
-    grid-template-columns: 70% 25%;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: 30px 0;
+    grid-template-columns: 3% 30% 67%;
+    gap: 0%;
+    justify-content: center; 
+    border-radius: 8px;
     font-size: 15px;
+    overflow: hidden;
+   height: 440px;
  }
- .order-detail-sum{ 
-    height: fit-content;
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    box-sizing: border-box;
-    padding: 20px;
+ .order-detail-sec{
+  border-right: 1px solid gray;
  }
- .order-detail-sum ul{
-    display: grid;
-    grid-template-columns: 40% 45%;
-    gap: 4%;
- }
-
  .order-detail-sec2{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+   display: flex; 
+   height: 440px;
+   flex-direction: column;
+   padding: 0 5px;
+ }
+ .order-detail-sec { 
+  padding: 0 5px;
+  overflow-y: scroll;
+  }
+ .order-detail-sec section:nth-child(odd){
+   background-color: #05050511;
+  } 
+ .order-detail-sec section:hover{
+  background-color: #7272723f;
+  } 
+  .order-detail-sec2> li:nth-child(odd){
+    background-color: #fff;
+    background-color: #05050511;
+  }
+  .order-detail-sec2> li{ 
+    padding: 5px 15px;
+    border-radius: 6px;
+  }
+  .order-detail-sec2> li:hover{   
+    background-color: #7272723f;
  }
  h1{
-    font-weight: 500;
+  font-size: 13px;
+ }
+ p{
+  font-size: 12px;
  }

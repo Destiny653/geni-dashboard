@@ -93,6 +93,7 @@ body {
 .filter-drop option,
 .action option,
 .order-list,
+.order-detail-p,
 table,
 thead ,
 tbody tr:nth-child(even),
