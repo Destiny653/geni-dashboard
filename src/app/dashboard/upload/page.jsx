@@ -13,7 +13,7 @@ import { basicUrl } from '@/app/components/Url';
 
 export default function Page() {
 
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState(false)
   const { setActionPath, setUpdateValue, updateValue } = useContext(GlobalContext)
   const [filter, setFilter] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
