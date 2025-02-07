@@ -55,14 +55,8 @@ export default function Page() {
 
   useEffect(() => {
 
-    fetchData()
-    const style = document.createElement('style');
-    style.textContent = `
-        .notyf__toast {
-            border-radius: 12px !important;
-        }
-    `;
-    document.head.append(style);
+    fetchData() 
+   
     return () => style.remove(); // Clean up on component unmount
   }, []);
 
@@ -128,7 +122,7 @@ export default function Page() {
                       <tr key={index}>
                         <td>{item.title}</td>
                         <td>{item.rate}</td>
-                        <td>{item.description}</td>
+                        <td>{item.description.splice(50)}</td>
                         <td>{item.price}</td>
                         <td>
                           <select className='flex justify-center items-center action' name="group" defaultValue={''} id="" onChange={(e) => { e.target.value == 'update' ? setActive(true) : handleDelete(item._id + '/' + item.model); setActionPath(e.target.value == 'update' && `${item._id}/${item.model}`); setUpdateValue(item); }}>
