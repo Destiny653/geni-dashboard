@@ -5,6 +5,7 @@ import './login.css';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css'; 
 import { useRouter } from 'next/navigation';
+import { basicUrl } from '../Url';
 
 export default function Login() {
 
@@ -30,7 +31,7 @@ export default function Login() {
             }
         })
         try {
-            const response = await fetch('https://geni-backend.onrender.com/api/client/login', {
+            const response = await fetch(basicUrl+'/api/client/login', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"

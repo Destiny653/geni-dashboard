@@ -9,10 +9,11 @@ import { GlobalContext } from '../../../../context/GlobalContext';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { useRouter } from 'next/navigation';
+import { basicUrl } from '@/app/components/Url';
 
 export default function Page() {
 
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(true)
   const { setActionPath, setUpdateValue, updateValue } = useContext(GlobalContext)
   const [filter, setFilter] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
@@ -37,7 +38,7 @@ export default function Page() {
 
     try {
 
-      const response = await fetch('https://geni-backend.onrender.com/api/category')
+      const response = await fetch(basicUrl+'/api/category')
       const req = await response.json()
       if (!response.ok) {
         notyf.error(req.message)
@@ -74,7 +75,7 @@ export default function Page() {
       }
     })
     try {
-      const response = await fetch('https://geni-backend.onrender.com/api/category/' + id, {
+      const response = await fetch(basicUrl+'/api/category/' + id, {
         method: 'DELETE'
       })
       const req = await response.json()
@@ -172,7 +173,7 @@ export default function Page() {
                 <li><input type='radio' name="group" id="" value={'Underwear'} onChange={(e) => setFilter(e.target.value)} /><span>Under wear</span></li>
               </ul>
             </section>
-            <button className='w-full cate-bar-btn' onClick={() => setActive(true)}>
+            <button className='w-full cate-bar-btn' onClick={() =>{setActive(true); setActionPath('create')}}>
               Add New Product
             </button>
           </section>
