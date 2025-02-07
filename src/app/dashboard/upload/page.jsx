@@ -5,9 +5,7 @@ import '../../components/Template/template.css'
 import './product.css';
 import Burger from '@/app/components/Burger/Burger';
 import StatusForm from '@/app/components/StatusForm/StatusForm';
-import { GlobalContext } from '../../../../context/GlobalContext';
-import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css';
+import { GlobalContext } from '../../../../context/GlobalContext'; 
 import { useRouter } from 'next/navigation';
 import { basicUrl } from '@/app/components/Url';
 
@@ -27,26 +25,18 @@ export default function Page() {
     console.log("token: ", token);
   },[])
 
-  const fetchData = async () => {
-    const notyf = new Notyf({
-      duration: 4000,
-      position: {
-        x: 'right',
-        y: 'top'
-      }
-    })
+  const fetchData = async () => { 
 
     try {
 
       const response = await fetch(basicUrl+'/api/category')
       const req = await response.json()
-      if (!response.ok) {
-        notyf.error(req.message)
+      if (!response.ok) { 
         return
       }
       setData(req)
     } catch (error) {
-      notyf.error('Error: ', error.message)
+      alert('Error: ', error.message)
     }
   }
 
@@ -61,26 +51,20 @@ export default function Page() {
   }, []);
 
   const handleDelete = async (id) => {
-    const notyf = new Notyf({
-      duration: 4000,
-      position: {
-        x: 'right',
-        y: 'top'
-      }
-    })
+   
     try {
       const response = await fetch(basicUrl+'/api/category/' + id, {
         method: 'DELETE'
       })
       const req = await response.json()
       if (!response.ok) {
-        notyf.error(req.message)
+        alert(req.message)
       }
-      notyf.success(req.message)
+      alert(req.message)
       fetchData()
     } catch (error) {
       console.error(error)
-      notyf.error('Error: ', error.message)
+      alert('Error: ', error.message)
     }
   }
 
